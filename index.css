@@ -52,5 +52,39 @@ main {
     border-radius: 50%;
     align-content: center;
     justify-content: center;
+    font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 20px;
+    text-align: center;
 }
 
+.cell2 {
+  background-color: aqua;
+}
+
+.cell4 {
+  background-color: aquamarine;
+  
+}
+.cell8 {
+  background-color: azure;
+}
+
+.cell16 {
+  background-color: yellow;
+}
+
+.cell32 {
+  background-color: blueviolet;
+}
+
+.cell64 {
+  background-color: aliceblue;
+}
+
+.cell128 {
+  background-color: turquoise;
+}
+
+.cell256 {
+  background-color: seagreen;
+}

@@ -1,45 +1,23 @@
-let rowTop = [0, 0, 0];
-let rowMiddle = [0, 0, 0];
-let rowBottom = [0, 0, 0];
+let board = [
+    [0, 2, 0], //rowTop is index 0 of board. rowTop column 1 is board[0][0]
+    [0, 4, 0], //rowMiddle is index 1. The third column would be board[1][2]
+    [0, 0, 0], //rowBottom is index 2
+  ];
 
-function init () {    
-    rowBottom[0] = 2;
+// let rowTop = [0, 0, 0];
+// let rowMiddle = [0, 0, 0];
+// let rowBottom = [0, 0, 0];
+
+function init() {    
+    rowBottom[0] = 2; 
     rowMiddle[0] = 2;
-}
-function moveUp() {
-    for (let i = 0; i < 3; i++) {
-        let cellBottom = rowBottom[i];
-        let cellMiddle = rowMiddle[i];
-        let cellTop = rowTop[i];
-            if (cellBottom === cellMiddle) {
-                cellBottom = 0;
-                if (cellTop === 0) {
-                    cellTop = cellMiddle*2;
-                    cellMiddle = 0;
-                }
-                else {
-                    cellMiddle = cellMiddle*2;
-                }
-            }
-            else if (cellBottom === cellTop && cellMiddle === 0) {
-                cellBottom = 0;
-                cellTop = cellTop*2;
-            }
-            else if (cellMiddle === cellTop) {
-                cellMiddle = cellBottom;
-                cellTop = cellTop*2;
-                cellBottom = 0;
-            }
-    rowBottom[i] = cellBottom;
-    rowMiddle[i] = cellMiddle;
-    rowTop[i] = cellTop;
-        }
-}
+
 function moveDown() {
     for (let j = 0; j < 3; j++) {
         let cellTop = rowTop[j];
         let cellMiddle = rowMiddle[j];
         let cellBottom = rowBottom[j];
+        
             if (cellTop === cellMiddle) {
                 cellTop = 0;
                 if (cellBottom === 0) {
@@ -78,9 +56,7 @@ function moveRigth() {
 
 
 
-function printMatrix() {
+function printMatrix() { 
     console.log(rowTop);
     console.log(rowMiddle);
     console.log(rowBottom);
-
-}
