@@ -1,23 +1,66 @@
 let board = [
-    [0, 2, 0], //rowTop is index 0 of board. rowTop column 1 is board[0][0]
-    [0, 4, 0], //rowMiddle is index 1. The third column would be board[1][2]
-    [0, 0, 0], //rowBottom is index 2
-  ];
+    [0, 0, 0], 
+    [0, 0, 0], 
+    [0, 0, 0], 
+];
 
-// let rowTop = [0, 0, 0];
-// let rowMiddle = [0, 0, 0];
-// let rowBottom = [0, 0, 0];
+let temporaryBoard = [];
+let emptyCells = [];
+let gameOver = false;
 
-function init() {    
-    rowBottom[0] = 2; 
-    rowMiddle[0] = 2;
+function initialiseGame() {  
+    board = [
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0]
+    ];
+    temporaryBoard = [];
+    gameOver = false;
+    readEmptyCells();
+    addCell();
+    readEmptyCells();
+    addCell();
+}
 
-function moveDown() {
-    for (let j = 0; j < 3; j++) {
+function readEmptyCells() {
+  for (let r = 0; r < 3; r++) {
+    for (let c = 0; c < 3; c++) {
+      if (board[r][c] === 0) {
+        emptyCells.push([r, c]);
+      }
+    }
+  }
+  if (emptyCells.length === 0) {
+    gameOver = true;
+  }
+}
+
+function selectRadomValueFromArray(myArray) {
+    let randomIndex = Math.floor(Math.randon() * myArray.length);
+    return myArray[randomIndex];
+}
+
+function addCell() {
+    let cellCoordinates = selectRadomValueFromArray(emptyCells);
+    let r = cellCoordinates[0];
+    let c = cellCoordinates[1];
+    board[r][c] = selectRadomValueFromArray([2, 4]);
+}
+
+function rotateMatrix(numberofRotations, finalRotation) {
+
+    }
+    
+
+
+function move() {
+    for (let i = 0; i < 3; i++) {
         let cellTop = rowTop[j];
         let cellMiddle = rowMiddle[j];
         let cellBottom = rowBottom[j];
-        
+        //board[0][j] is equivalent to cellTop
+        //board[1][j] is equivalent to cellMiddle
+        //board[2][j] is equivalent to cellBottom
             if (cellTop === cellMiddle) {
                 cellTop = 0;
                 if (cellBottom === 0) {
@@ -55,8 +98,8 @@ function moveRigth() {
 }
 
 
-
-function printMatrix() { 
+function printMatrix() { // erase when finish
     console.log(rowTop);
     console.log(rowMiddle);
     console.log(rowBottom);
+}

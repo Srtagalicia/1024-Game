@@ -88,3 +88,11 @@ main {
 .cell256 {
   background-color: seagreen;
 }
+
+.cell512 {
+    background-color: greenyellow;
+}
+
+.cell1024 {
+    background-color: yellowgreen;
+}
