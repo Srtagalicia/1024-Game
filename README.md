@@ -48,9 +48,9 @@
 
 ### Git
 URls for the project repo and deploy
-[Link Repo]()
-[Link Deploy]()
+[Link Repo](https://github.com/Srtagalicia/1024-Game)
+[Link Deploy](https://srtagalicia.github.io/1024-Game/)
 
 ### Slides
 URls for the project presentation (slides)
-[Link Slides.com]()
+[Link Slides.com](https://docs.google.com/presentation/d/1WZsKfwmTZGQ6EMpRY754_H3mpxYa2ePiDdsTEoRBncU/edit?usp=sharing)
