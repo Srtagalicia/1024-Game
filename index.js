@@ -23,7 +23,8 @@ function initialiseGame() {
 }
 
 function readEmptyCells() {
-  for (let r = 0; r < 3; r++) {
+    emptyCells = [];
+    for (let r = 0; r < 3; r++) {
     for (let c = 0; c < 3; c++) {
       if (board[r][c] === 0) {
         emptyCells.push([r, c]);
@@ -48,58 +49,99 @@ function addCell() {
 }
 
 function rotateMatrix(numberofRotations, finalRotation) {
-
+    let tempMatrix = [];
+    if (finalRotation) {
+      tempMatrix = [...temporaryBoard];
+    } 
+    else {
+        tempMatrix = [...board];
     }
-    
+    let n = tempMatrix.length;
+    for (let rotation = 0; rotation < numberOfRotations; rotation++) {
+      for (let i = 0; i < n / 2; i++) {
+        for (let j = i; j < n - i - 1; j++) {
+          let tmp = tempMatrix[i][j];
+          tempMatrix[i][j] = tempMatrix[n - j - 1][i];
+          tempMatrix[n - j - 1][i] = tempMatrix[n - i - 1][n - j - 1];
+          tempMatrix[n - i - 1][n - j - 1] = tempMatrix[j][n - i - 1];
+          tempMatrix[j][n - i - 1] = tmp;
+        }
+      }
+    }
+    if (finalRotation) {
+      board = [...tempMatrix];
+    } 
+    else {
+      temporaryBoard = [...tempMatrix];
+    }
+}
+function moveColumn(a, b, c) {
+    if (b === c) {
+      c = c * 2;
+      b = 0
+    } 
+    else if (b !== 0 && c == 0) {
+      c = b;
+      b = 0;
+    }
+  
+    if (a === b) {
+      b = b * 2;
+      a = 0;
+    } 
+    else if (a !== 0 && b === 0) {
+      if (c === 0) {
+        c = a;
+        a = 0;
+      } 
+      else if (c === a) {
+        c = c * 2;
+        a = 0;
+      } 
+      else {
+        b = a;
+        a = 0;
+      }
+    }
+    return [a, b, c];
+  }
 
-
-function move() {
+  function move() {
     for (let i = 0; i < 3; i++) {
-        let cellTop = rowTop[j];
-        let cellMiddle = rowMiddle[j];
-        let cellBottom = rowBottom[j];
-        //board[0][j] is equivalent to cellTop
-        //board[1][j] is equivalent to cellMiddle
-        //board[2][j] is equivalent to cellBottom
-            if (cellTop === cellMiddle) {
-                cellTop = 0;
-                if (cellBottom === 0) {
-                    cellBottom = cellMiddle*2;
-                    cellMiddle = 0;
-                }
-                else {
-                    cellMiddle = cellMiddle*2;
-                }
-            }
-            else if (cellTop === cellBottom && cellMiddle === 0) {
-                cellTop = 0;
-                cellBottom = cellBottom*2;
-            }
-            else if (cellMiddle === cellBottom) {
-                cellMiddle = cellTop;
-                cellBottom = cellBottom*2;
-                cellTop = 0;
-            }
-    rowBottom[j] = cellBottom;
-    rowMiddle[j] = cellMiddle;
-    rowTop[j] = cellTop;
-        }
-}
-
-let columnRight = [];
-let columnCenter = [];
-let columnLeft = [];
-function moveRigth() {
-    for (let k = 0; k < 3; k++) {
-        let cellRight = columnRight[k];
-        let cellCenter = columnCenter[k];
-        let cellLeft = columnLeft[k];
-        }
-}
-
-
-function printMatrix() { // erase when finish
-    console.log(rowTop);
-    console.log(rowMiddle);
-    console.log(rowBottom);
-}
+      let ordered = moveColumn(temporaryBoard[0][i], temporaryBoard[1][i], temporaryBoard[2][i]);
+      temporaryBoard[0][i] = ordered[0];
+      temporaryBoard[1][i] = ordered[1];
+      temporaryBoard[2][i] = ordered[2];
+    }
+  }
+  
+  function moveUp() {
+    rotateMatrix(2, false); 
+    move(); 
+    rotateMatrix(2, true); 
+  }
+  
+  function moveRight() {
+    rotateMatrix(1, false);  
+    move(); 
+    rotateMatrix(3, true);
+  }
+  
+  function moveDown() {
+    temporaryBoard = [...board]
+    console.log(board, temporaryBoard);
+    move();
+    board = [...temporaryBoard]
+  }
+  
+  function moveLeft() {
+    rotateMatrix(3, false); 
+    move(); 
+    rotateMatrix(1, true);
+  }
+  
+  function endMove() {
+    readEmptyCells();
+    addCell();
+    drawBoard();
+  }

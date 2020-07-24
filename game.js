@@ -1,9 +1,8 @@
 $(document).ready(function start() {
-    drawBoard();
-    readEmptyCells();
+    bindKeys();
     addCell();
     drawBoard();
-})
+});
 
 function drawBoard() {
     for (let r = 0; r < 3; r++) {
@@ -13,34 +12,30 @@ function drawBoard() {
             $(selector).attr('class', 'cell').text('');
         }
         else {
-            $(selector).addClass(`cell${board[r][c]}`).text(board[r][c]);
+            $(selector).attr('class', `cell cell${board[r][c]}`).text(board[r][c]);
         }  
           }
         }
-      }
+    }
 
 function bindKeys() {
     $('body').on('keydown', function (e){
         switch (e.keyCode) {
             case 38:
                 moveUp();
-                addCell();
-                drawBoard();
+                endMove();
                 break;
             case 40:
                 moveDown();
-                addCell();
-                drawBoard();
+                endMove();
                 break;
             case 37:
                 moveLeft();
-                addCell();
-                drawBoard();
+                endMove();
                 break;
             case 39:
                 moveRight();
-                addCell();
-                drawBoard();
+                endMove();
                 break;
             case 82:
                 initialiseGame();
