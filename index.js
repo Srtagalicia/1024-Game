@@ -37,7 +37,7 @@ function readEmptyCells() {
 }
 
 function selectRadomValueFromArray(myArray) {
-    let randomIndex = Math.floor(Math.randon() * myArray.length);
+    let randomIndex = Math.floor(Math.random() * myArray.length);
     return myArray[randomIndex];
 }
 
